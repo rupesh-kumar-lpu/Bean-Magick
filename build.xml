@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Magick Bean" default="main" basedir=".">
+	<property name="pkg.version" value="6.2.9"/>
+	<property name="build.dir" value="../build"/>
+	<property name="output.dir" value="${build.dir}/output"/>
+	<property name="source.dir" value="src"/>
+	<property name="class.dir" value="${build.dir}/class"/>
+	<property name="lib.dir" value="../../../../lib"/>
+	
+	<target name="init">
+		<mkdir dir="${output.dir}"/>
+		<delete dir="${class.dir}"/>
+		<mkdir dir="${class.dir}"/>
+	</target>
+
+	<target name="main">
+		<!-- JDK 1.4 -->
+		<antcall target="init"/>
+		<antcall target="compile">
+			<param name="jdk.version" value="4"/>
+		</antcall>
+		<antcall target="archive">
+			<param name="jdk.version" value="4"/>
+		</antcall>
+		
+		<!-- JDK 1.5 -->
+		<antcall target="init"/>
+		<antcall target="compile">
+			<param name="jdk.version" value="5"/>
+		</antcall>
+		<antcall target="archive">
+			<param name="jdk.version" value="5"/>
+		</antcall>
+		
+		<!-- ZIP -->
+		<antcall target="zip"/>
+		
+		<!-- COPY LIB -->
+		<copy todir="${lib.dir}">
+			<fileset dir="${output.dir}" includes="la-Bean.Magick_*.jar"/>
+		</copy>
+		
+	</target>
+	
+	<target name="compile" description="Build class">
+		<javac
+			srcdir="${source.dir}"
+			destdir="${class.dir}"
+			classpath="../${output.dir}/la-Lib_${jdk.version}.jar"
+			debug="false"
+			optimize="true"
+			deprecation="false"
+			source="1.${jdk.version}"
+			target="1.${jdk.version}"/>
+	</target>
+	
+	<target name="archive" description="Create JAR-File">
+		<jar destfile="${output.dir}/la-Bean.Magick_${jdk.version}.jar">
+			<manifest>
+				<attribute name="Created-By" value="laukien.com (Laukien dot COM)"/>
+				<attribute name="Main-Class" value="com.laukien.Welcome"/>
+				<attribute name="Implementation-Title" value="Magick Bean"/>
+				<attribute name="Implementation-Version" value="${pkg.version}"/>
+				<attribute name="JDK-Version" value="1.${jdk.version}"/>
+				<attribute name="Implementation-Vendor" value="Laukien dot COM"/>
+				<attribute name="Extension-Name" value="com.laukien.bean"/>
+				<section name="com.laukien.bean.magick.Antialias">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Average">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Backdrop">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Background">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.BlackPointCompensation">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.BluePrimary">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Blur">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Border">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Bordercolor">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Channel">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Charcoal">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Chop">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Clip">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Coalesce">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.CommandAbstract">
+					<attribute name="Bean" value="false"/>
+				</section>
+				<section name="com.laukien.bean.magick.CommandInterface">
+					<attribute name="Bean" value="false"/>
+				</section>
+				<section name="com.laukien.bean.magick.Compress">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Config">
+					<attribute name="Bean" value="false"/>
+				</section>
+				<section name="com.laukien.bean.magick.Contrast">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Crop">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Density">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Depth">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Descent">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Despeckle">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Displace">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Dissolve">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Dither">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Edge">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Emboss">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Enhance">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Equalize">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Extend">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Extract">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Fill">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Filter">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Flatten">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Flip">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Flop">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Font">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Foreground">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Fuzz">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Gamma">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Gaussian">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Geometry">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.GreenPrimary">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Gravity">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Identify">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Implode">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Interlace">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Interpolate">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Magick">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.MagickBeanInfo">
+					<attribute name="Bean" value="false"/>
+				</section>
+				<section name="com.laukien.bean.magick.Magnify">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Matte">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Mattecolor">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Median">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Metric">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Mode">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Monitor">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Monochrome">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Mosaic">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Negate">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Noise">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Normalize">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Opaque">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Page">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Paint">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Pointsize">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Postersize">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Quality">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Raise">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.RedPrimary">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Region">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Render">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Repage">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Resample">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Resize">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Roll">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Rotate">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Sample">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.SampleFactor">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Scale">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.SepiaTone">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Sharpen">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Shave">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Size">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Sketch">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Solarize">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Splice">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Support">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Swirl">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Thumbnail">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Transparent">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.TransparentColor">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Transpose">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Transverse">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Treedepth">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Trim">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Type">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.UniqueColor">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Unit">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Unsharp">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Vignette">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.Wave">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.WhitePoint">
+					<attribute name="Bean" value="true"/>
+				</section>
+				<section name="com.laukien.bean.magick.template.Thumbnail">
+					<attribute name="Bean" value="true"/>
+				</section>
+			</manifest>
+			<fileset dir="${class.dir}"/>
+		</jar>
+	</target>
+
+	<target name="zip">
+		<zip destfile="${output.dir}/la-Bean.Magick.zip">
+			<zipfileset dir="${output.dir}" includes="la-Bean.Magick_*.jar" prefix="lib"/>
+			<zipfileset dir="../${output.dir}" includes="la-Lib_*.jar" prefix="lib"/>
+			<zipfileset dir="example" includes="**/*" prefix="example"/>
+		</zip>
+	</target>
+</project>
